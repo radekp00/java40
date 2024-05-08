@@ -44,11 +44,13 @@ class Main {
     Scanner myObj = new Scanner(System.in);
     System.out.println("Podaj imie studenta: ");
     String imie = myObj.nextLine();
+    System.out.println("Podaj nazwisko studenta: ");
+    String nazwisko = myObj.nextLine();
     System.out.println("Podaj wiek studenta: ");
     int wiek = myObj.nextInt();
     try {
       Service s = new Service();
-      s.addStudent(new Student(imie, wiek));
+      s.addStudent(new Student(imie, wiek, nazwisko));
     } catch (IOException e) {
 
     }
