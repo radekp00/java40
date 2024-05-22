@@ -15,12 +15,14 @@ import java.util.regex.Pattern;
 class Main {
   public static void main(String[] args) {
     Scanner myObj = new Scanner(System.in);
+    Service s = new Service();
     while (true) {
 
       int pos = 0;
       System.out.println("0. Wyjscie");
       System.out.println("1. Dodawanie studenta");
       System.out.println("2. Wyswieltanie studentow");
+      System.out.println("3. Znajdz studentow");
 
       pos = myObj.nextInt();
 
@@ -33,6 +35,12 @@ class Main {
         case 2:
           zobaczStudentow();
           break;
+        case 3:
+          System.out.println("Podaj imie studenta");
+          String imie = myObj.next();
+          Student stud = s.findStudentByName(imie);
+          System.out.println(stud.ToString());
+          break;
         default:
 
           break;
@@ -43,6 +51,7 @@ class Main {
   }
 
   public static void dodajStudenta() {
+    Service s = new Service();
     Scanner myObj = new Scanner(System.in);
     System.out.println("Podaj imie studenta: ");
     String imie = myObj.nextLine();
@@ -55,7 +64,7 @@ class Main {
     dataUrodzenia = myObj.nextLine();
     if (validateDate(dataUrodzenia)) {
       try {
-        Service s = new Service();
+
         s.addStudent(new Student(imie, wiek, nazwisko, dataUrodzenia));
       } catch (IOException e) {
 

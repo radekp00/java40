@@ -27,7 +27,7 @@ public class Student {
   public String GetDataUrodzenia() {
     return DataUrodzenia;
   }
-
+  
   public String ToString() {
     return Name + " " + Nazwisko + " "+ Integer.toString(Age) + " "+ DataUrodzenia;
   }
