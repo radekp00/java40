@@ -9,6 +9,8 @@ Kod bazowy programu Commit4_0:
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 class Main {
   public static void main(String[] args) {
@@ -48,12 +50,20 @@ class Main {
     String nazwisko = myObj.nextLine();
     System.out.println("Podaj wiek studenta: ");
     int wiek = myObj.nextInt();
-    try {
-      Service s = new Service();
-      s.addStudent(new Student(imie, wiek, nazwisko));
-    } catch (IOException e) {
+    System.out.println("Podaj date urodzenia (w formacie DD-MM-RRRR): ");
+    String dataUrodzenia = myObj.nextLine();
+    dataUrodzenia = myObj.nextLine();
+    if (validateDate(dataUrodzenia)) {
+      try {
+        Service s = new Service();
+        s.addStudent(new Student(imie, wiek, nazwisko, dataUrodzenia));
+      } catch (IOException e) {
 
+      }
+    } else {
+      System.out.println("data nieprawidlowa");
     }
+
   }
 
   public static void zobaczStudentow() {
@@ -67,5 +77,12 @@ class Main {
     } catch (IOException e) {
 
     }
+  }
+
+  public static Boolean validateDate(String date) {
+    Pattern pattern = Pattern.compile("^(?:0[1-9]|[12]\\d|3[01])([\\/.-])(?:0[1-9]|1[012])\\1(?:19|20)\\d\\d$",
+        Pattern.CASE_INSENSITIVE);
+    Matcher matcher = pattern.matcher(date);
+    return matcher.find();
   }
 }
